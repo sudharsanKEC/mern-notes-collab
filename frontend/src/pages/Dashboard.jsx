@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [showAdd, setShowAdd] = useState(false);
   const [newTitle, setNewTitle] = useState('');
   const [newContent, setNewContent] = useState('');
+  const [toastMessage, setToastMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -57,6 +58,8 @@ export default function Dashboard() {
       setNewTitle('');
       setNewContent('');
       setShowAdd(false);
+      setToastMessage('Notes added successfully');
+      setTimeout(() => setToastMessage(''), 3000);
     } catch (err) {
       console.error('Error adding note:', err);
     }
@@ -153,6 +156,22 @@ export default function Dashboard() {
           ))
         )}
       </div>
+      {toastMessage && (
+        <div style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          backgroundColor: 'var(--primary, #4caf50)',
+          color: 'white',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          zIndex: 1000,
+          animation: 'fadeIn 0.3s ease-out'
+        }}>
+          {toastMessage}
+        </div>
+      )}
     </div>
   );
 }
