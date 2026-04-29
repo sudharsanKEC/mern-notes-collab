@@ -29,7 +29,7 @@ app.post("/notes", async (req, res) => {
 // Read
 app.get("/notes", async (req, res) => {
   try {
-    const notes = await Note.find();
+    const notes = await Note.find({ userId: req.query.userId });
     res.json(notes);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -61,7 +61,7 @@ app.delete("/notes/:id", async (req, res) => {
 });
 
 // IMPORTANT: start server
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5001, () => console.log("Server running on port 5001"));
 
 app.post("/signup", async (req, res) => {
   try {
